@@ -92,7 +92,7 @@ impl LapceState {
 
     fn get_keymaps() -> Result<Vec<KeyMap>> {
         let mut keymaps = Vec::new();
-        let mut f = File::open("/Users/Lulu/lapce/.lapce/keymaps.toml")?;
+        let mut f = File::open("./keymaps.toml")?;
         let mut content = vec![];
         f.read_to_end(&mut content)?;
         let toml_keymaps: toml::Value = toml::from_slice(&content)?;

@@ -1,0 +1,5 @@
+- clone xi-editor to ../ folder
+- cargo build
+- main.rs modify the open_file path
+- state.rs modify keymaps.toml file path
+- cargo run it

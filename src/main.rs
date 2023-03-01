@@ -76,7 +76,7 @@ pub fn main() {
     let ui_event_sink = launcher.get_external_handle();
     LAPCE_STATE.set_ui_sink(ui_event_sink);
     thread::spawn(move || {
-        LAPCE_STATE.open_file("/Users/Lulu/lapce/src/editor.rs")
+        LAPCE_STATE.open_file("./src/editor.rs")
     });
     launcher
         .use_simple_logger()
