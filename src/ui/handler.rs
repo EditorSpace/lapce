@@ -1,6 +1,7 @@
 use super::widget::Widget;
-use druid::shell::keyboard::{KeyEvent, KeyModifiers};
-use druid::shell::window::{MouseEvent, WinCtx, WinHandler, WindowHandle};
+use druid_shell::KeyEvent;
+use druid::KeyModifiers;
+use druid_shell::{MouseEvent, WinHandler, WindowHandle};
 use druid::shell::{kurbo, piet, runloop, WindowBuilder};
 use druid::{BoxConstraints, PaintCtx, TimerToken};
 use kurbo::{Affine, Point, Rect, RoundedRect, Size, Vec2};
@@ -35,38 +36,40 @@ impl WinHandler for UiHandler {
         self.root.lock().unwrap().layout(&bc);
 
         // piet.clear(Color::rgb8(0x27, 0x28, 0x22));
-        let mut paint_ctx = PaintCtx { render_ctx: piet };
+        let mut paint_ctx = PaintCtx { render_ctx: piet }; // FIXME: - init paint ctx
         self.root.lock().unwrap().paint(&mut paint_ctx);
         false
     }
 
-    fn command(&mut self, id: u32, ctx: &mut dyn WinCtx) {
+    fn command(&mut self, id: u32) {
         eprintln!("got command {}", id);
     }
 
-    fn size(&mut self, width: u32, height: u32, _ctx: &mut dyn WinCtx) {
+    fn size(&mut self, size: Size) {
+        let width = size.width;
+        let height = size.height;
         let dpi = self.handle.get_dpi() as f64;
         let scale = 96.0 / dpi;
         self.size = Size::new(width as f64 * scale, height as f64 * scale);
     }
 
-    fn mouse_down(&mut self, event: &MouseEvent, ctx: &mut dyn WinCtx) {
+    fn mouse_down(&mut self, event: &MouseEvent) {
         self.root.lock().unwrap().mouse_down(event, ctx);
     }
 
-    fn mouse_up(&mut self, event: &MouseEvent, ctx: &mut dyn WinCtx) {}
+    fn mouse_up(&mut self, event: &MouseEvent) {}
 
-    fn mouse_move(&mut self, event: &MouseEvent, ctx: &mut dyn WinCtx) {}
+    fn mouse_move(&mut self, event: &MouseEvent) {}
 
-    fn key_down(&mut self, event: KeyEvent, ctx: &mut dyn WinCtx) -> bool {
+    fn key_down(&mut self, event: KeyEvent) -> bool {
         self.root.lock().unwrap().key_down(event, ctx)
     }
 
-    fn key_up(&mut self, event: KeyEvent, ctx: &mut dyn WinCtx) {}
+    fn key_up(&mut self, event: KeyEvent) {}
 
-    fn wheel(&mut self, delta: Vec2, mods: KeyModifiers, ctx: &mut dyn WinCtx) {}
+    fn wheel(&mut self, event: &MouseEvent) {}
 
-    fn timer(&mut self, token: TimerToken, ctx: &mut dyn WinCtx) {}
+    fn timer(&mut self, token: TimerToken) {}
 
     fn as_any(&mut self) -> &mut dyn Any {
         self

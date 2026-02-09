@@ -5,6 +5,7 @@ use druid::shell::piet;
 use piet::{CairoText, Font, FontBuilder, Text};
 use std::collections::HashMap;
 use std::sync::{Arc, Mutex, Weak};
+use piet_cairo::CairoText;
 use syntect::highlighting::ThemeSettings;
 
 #[derive(Clone)]

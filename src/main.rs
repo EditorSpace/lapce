@@ -9,8 +9,9 @@ mod xi_thread;
 
 use app::{App, AppDispatcher};
 use config::{AppFont, Config};
-use druid::shell::keyboard::{KeyEvent, KeyModifiers};
-use druid::shell::window::{MouseEvent, WinCtx, WinHandler, WindowHandle};
+use druid_shell::KeyEvent;
+use druid::KeyModifiers;
+use druid_shell::{MouseEvent, WinHandler, WindowHandle};
 use druid::shell::{kurbo, piet, runloop, WindowBuilder};
 use druid::widget::{Button, DynLabel, Padding, Scroll};
 use kurbo::{Affine, Point, Rect, RoundedRect, Size, Vec2};

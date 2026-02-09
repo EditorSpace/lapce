@@ -23,4 +23,4 @@ default-features = false
 path = "../druid/druid-shell"
 
 [dependencies.druid]
-path = "../druid"
+path = "../druid/druid"
